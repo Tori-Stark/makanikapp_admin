@@ -1,8 +1,8 @@
 <?php
 include('includes/header.php');
+//session_start();
 include('includes/auth_check.php');
 
-session_start();
 
 ?>
 
@@ -14,11 +14,11 @@ session_start();
                     <h4>Total Breakdowns :
                         <?php
                         include('dbcon.php');
-                        $ref_table = 'breakdown';
+                        $ref_table = 'breakdowns';
                         if (!empty($database)) {
-                            $total_breakdown_data = $database->getReference($ref_table)->getSnapshot()->numChildren();
+                            $total_breakdowns_data = $database->getReference($ref_table)->getSnapshot()->numChildren();
                         }
-                        echo $total_breakdown_data;
+                        echo $total_breakdowns_data;
 
 
                         ?>
@@ -34,7 +34,7 @@ session_start();
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        Breakdowns
+                        Breakdown Details
 
                     </h4>
                 </div>
@@ -45,8 +45,10 @@ session_start();
                             <th>Breakdown Number</th>
                             <th>User Email</th>
                             <th>Mechanic Email</th>
-                            <th>Date</th>
-                            <th>Time</th>
+                            <th>Price</th>
+                            <th>Rating Given</th>
+                            <th>Time Stamp</th>
+
 
                         </tr>
 
@@ -55,7 +57,7 @@ session_start();
 
                         <?php
                         include('dbcon.php');
-                        $ref_table = 'breakdown';
+                        $ref_table = 'breakdowns';
                         $fetch_breakdown_data = $database->getReference($ref_table)->getValue();
 
                         if($fetch_breakdown_data>0){
@@ -64,10 +66,11 @@ session_start();
                                 ?>
                                 <tr>
                                     <td><?=$i++;?>
-                                    <td><?=$row['email'];?></td>
+                                    <td><?=$row['useremail'];?></td>
                                     <td><?=$row['mechanicemail'];?></td>
-                                    <td><?=$row['date_of_breakdown'];?></td>
-                                    <td><?=$row['time_of_breakdown'];?></td>
+                                    <td><?=$row['price'];?></td>
+                                    <td><?=$row['rating'];?></td>
+                                    <td><?=$row['timestamp'];?></td>
 
 
 

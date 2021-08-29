@@ -1,6 +1,6 @@
 <?php
 include('includes/header.php');
-session_start();
+//session_start();
 include('includes/auth_check.php');
 
 
@@ -49,6 +49,11 @@ include('includes/auth_check.php');
                                     <div class="form-group mb-3">
                                         <label for="pnumber">Phone Number</label>
                                         <input type="number" name="pnumber" value="<?=$get_mechanic_data['phoneno'];?>" class="form-control">
+
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="approved">Approved :  Use 'YES' and 'NO' </label>
+                                        <input type="text" name="approved" value="<?=$get_mechanic_data['approved'];?>" class="form-control">
 
                                     </div>
                                     <div class="form-group mb-3">

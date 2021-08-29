@@ -2,7 +2,7 @@
 include('includes/header.php');
 include('includes/auth_check.php');
 
-session_start();
+//session_start();
 ?>
 
 <div class="container">

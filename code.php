@@ -11,24 +11,6 @@ if(isset($_POST['sign_in_button'])){
 
         $auth = $factory->createAuth();
         $signInResult = $auth->signInWithEmailAndPassword($email, $password);
-//        $uid = 'some-uid';
-//
-//        $customToken = $auth->createCustomToken($uid);
-//        $idTokenString = '...';
-//
-//        try {
-//            $verifiedIdToken = $auth->verifyIdToken($idTokenString);
-//            $uid = $verifiedIdToken->claims()->get('sub');
-//            $user = $auth->getUser($uid);
-//        } catch (InvalidToken $e) {
-//            echo 'The token is invalid: '.$e->getMessage();
-//        } catch (\InvalidArgumentException $e) {
-//            echo 'The token could not be parsed: '.$e->getMessage();
-//        }
-
-
-
-
 
 
     }catch(Exception $e){
@@ -39,6 +21,7 @@ if(isset($_POST['sign_in_button'])){
     if($signInResult){
         $_SESSION['status'] = "Log In Successful";
         $_SESSION['useremail'] = $email;
+
 
 
         header('Location: index.php');
@@ -64,7 +47,7 @@ if(isset($_POST['sign_up_button'])){
     $email = $_POST['email'];
     $phonenumber = $_POST['pnumber'];
     $password = $_POST['password'];
-    $state = 'active';
+    $state = 'ACTIVE';
 
     $postUserData = [
         'fname'=>$firstname,
@@ -76,14 +59,19 @@ if(isset($_POST['sign_up_button'])){
 
 
     ];
-    $ref_table = 'user';
+    $auth = $factory->createAuth();
+    try {
+        $createdUser = $auth->createUser($postUserData);
+    } catch (\Kreait\Firebase\Exception\AuthException $e) {
+    } catch (\Kreait\Firebase\Exception\FirebaseException $e) {
+    }
 
-    $postRef_result = $database->getReference($ref_table)->push($postUserData);
-    if($postRef_result){
+    if($createdUser){
+        $link = $auth->getEmailVerificationLink($email);
 
         echo "
                 <script language='javascript'>
-                 alert('⚠Registration Successful.');
+                 alert('⚠Registration Successful. Check Email for Verification');
                   window.location.href = 'log_in.php'; 
                     </script>";;
     }
@@ -124,7 +112,7 @@ if(isset($_POST['edit_user'])){
     $email = $_POST['email'];
     $phonenumber = $_POST['pnumber'];
     $password = $_POST['password'];
-    $state = 'active';
+    $state = $_POST['status'];
 
     $editUserData = [
         'fname'=>$firstname,
@@ -146,6 +134,36 @@ if(isset($_POST['edit_user'])){
     else{
         $_SESSION['status'] = "Edit Not Successful";
         header('Location: index.php');
+
+    }
+
+}
+if(isset($_POST['editingadminprofile'])){
+    $key = $_POST['key'];
+    $firstname = $_POST['fname'];
+    $lastname = $_POST['lname'];
+
+    $phonenumber = $_POST['pnumber'];
+
+
+    $editAdminData = [
+        'fname'=>$firstname,
+        'lname'=>$lastname,
+        'phoneno'=>$phonenumber,
+
+
+
+    ];
+    $ref_table = 'user/'.$key;
+    $updateAdminInfo = $database->getReference($ref_table)->update($editAdminData);
+
+    if($updateAdminInfo){
+        $_SESSION['status'] = "Edit Was Successfully";
+        header('Location: viewprofile.php');
+    }
+    else{
+        $_SESSION['status'] = "Edit Not Successful";
+        header('Location: viewprofile.php');
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 include('includes/header.php');
-session_start();
+//session_start();
 include('includes/auth_check.php');
 
 
@@ -51,6 +51,12 @@ include('includes/auth_check.php');
                             <input type="number" name="pnumber" value="<?=$get_user_data['phoneno'];?>" class="form-control">
 
                         </div>
+                        <div class="form-group mb-3">
+                            <label for="status">User Status  : Use 'ACTIVE' or 'INACTIVE'</label>
+                            <input type="text" name="status" value="<?=$get_user_data['status'];?>" class="form-control">
+
+                        </div>
+
                         <div class="form-group mb-3">
                             <a href="index.php" class="btn btn-danger float-end">Back</a>
                             <button type="submit" name="edit_user" class="btn btn-primary">Edit User</button>

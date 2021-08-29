@@ -21,7 +21,24 @@
                     <a class="nav-link "  href="breakdowns_view.php"><b>Breakdowns</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link "  href="viewprofile.php"><b>View Profile</b></a>
+                    <?php
+                    session_start();
+                    include('dbcon.php');
+
+
+                    if(isset($_SESSION['useremail'])){
+                        $email =  $_SESSION['useremail'];
+                        $ref_table = 'user';
+                        $fetch_user_data = $database->getReference($ref_table)->getValue();
+                        if($fetch_user_data>0){
+                            $i = 1;
+                            foreach($fetch_user_data as $key=> $row){
+                    if($row['email']==$email)
+                    {
+                    ?>
+
+                    <a class="nav-link "  href="viewprofile.php?id=<?=$key;?>"><b>View Profile</b></a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link "  href="log_in.php"><b>Sign Out</b></a>
@@ -29,8 +46,17 @@
             </ul>
             <h3><a class="navbar-brand">Welcome,
             <?php
-            if(isset($_SESSION['useremail'])){
-                echo $_SESSION['useremail'];
+
+                    echo $row['fname'];
+                    $_SESSION['userid'] = $key;
+
+                }
+
+            }
+            }
+
+
+
             }
 
             ?>

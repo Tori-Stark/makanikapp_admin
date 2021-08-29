@@ -1,6 +1,6 @@
 <?php
 include('includes/header.php');
-session_start();
+//session_start();
 include('includes/auth_check.php');
 
 
@@ -19,8 +19,8 @@ include('includes/auth_check.php');
                 <div class="card-body">
                     <?php
                     include('dbcon.php');
-                    if(isset($_GET['id'])) {
-                        $key_child = $_GET['id'];
+                    if(isset($_SESSION['userid'])) {
+                        $key_child = $_SESSION['userid'];
 
                         $ref_user_table = 'user';
                         $get_user_data = $database->getReference($ref_user_table)->getChild($key_child)->getValue();
@@ -29,7 +29,7 @@ include('includes/auth_check.php');
 
 
 
-                            <form action="code.php" method="post">
+                            <form action="code.php"  method="post">
                                 <div class="form-group mb-3">
                                     <input type="hidden" name="key" value="<?=$key_child;?>">
                                     <label for="fname">First Name</label>
@@ -41,19 +41,15 @@ include('includes/auth_check.php');
                                     <input type="text" name="lname" value="<?=$get_user_data['lname'];?>" class="form-control">
 
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" value="<?=$get_user_data['email'];?>" class="form-control">
 
-                                </div>
                                 <div class="form-group mb-3">
                                     <label for="pnumber">Phone Number</label>
                                     <input type="number" name="pnumber" value="<?=$get_user_data['phoneno'];?>" class="form-control">
 
                                 </div>
                                 <div class="form-group mb-3">
-                                    <a href="index.php" class="btn btn-danger float-end">Back</a>
-                                    <button type="submit" name="edit_user" class="btn btn-primary">Edit User</button>
+                                    <a href="viewprofile.php" class="btn btn-danger float-end">Back</a>
+                                    <button type="submit" name="editingadminprofile" class="btn btn-primary">Submit</button>
 
                                 </div>
 

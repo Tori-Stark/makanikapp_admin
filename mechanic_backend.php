@@ -29,7 +29,7 @@ if(isset($_POST['edit_mechanic'])){
     $email = $_POST['email'];
     $phonenumber = $_POST['pnumber'];
     $password = $_POST['password'];
-    $state = 'active';
+    $state = $_POST['approved'];
 
     $editMechanicData = [
         'fname'=>$firstname,
@@ -37,7 +37,7 @@ if(isset($_POST['edit_mechanic'])){
         'email'=>$email,
         'phoneno'=>$phonenumber,
         'password'=>$password,
-        'status'=>$state
+        'approved'=>$state
 
 
     ];
@@ -65,7 +65,7 @@ if(isset($_POST['add_mechanic'])){
     $email = $_POST['email'];
     $phonenumber = $_POST['pnumber'];
     $password = $_POST['password'];
-    $state = 'active';
+    $state = 'NO';
 
     $postMechanicData = [
         'fname'=>$firstname,
@@ -73,7 +73,7 @@ if(isset($_POST['add_mechanic'])){
         'email'=>$email,
         'phoneno'=>$phonenumber,
         'password'=>$password,
-        'status'=>$state
+        'approved'=>$state
 
 
     ];

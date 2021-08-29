@@ -1,6 +1,6 @@
 <?php
 include('includes/header.php');
-session_start();
+//session_start();
 include('includes/auth_check.php');
 
 
@@ -32,7 +32,7 @@ include('includes/auth_check.php');
         <div class="col-md-12">
             <?php
             if(isset($_SESSION['status'])){
-                echo "<h5 class='alert alert-success'>".$_SESSION['status']." ".$_SESSION['useremail']."</h5>";
+                echo "<h5 class='alert alert-success'>".$_SESSION['status']."</h5>";
 
                 unset($_SESSION['status']);
             }
@@ -86,7 +86,7 @@ include('includes/auth_check.php');
                                     <td>
 <!--                                        <a href="delete_user.php" class="btn btn-danger btn-sm">Delete</a>-->
                                         <form method="post" action="code.php">
-                                            <button class="btn btn-danger btn-sm" type="submit" value="<?=$key;?>" onclick="return confirm('Are you sure you want to delete this item?');" name="delete_user_button">Delete</button>
+                                            <button class="btn btn-danger btn-sm" type="submit" value="<?=$key;?>" onclick="return confirm('Are you sure you want to delete this user?');" name="delete_user_button">Delete</button>
                                         </form>
 
                                     </td>

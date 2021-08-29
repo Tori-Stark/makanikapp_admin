@@ -1,6 +1,6 @@
 <?php
 include('includes/header.php');
-session_start();
+//session_start();
 include('includes/auth_check.php');
 
 

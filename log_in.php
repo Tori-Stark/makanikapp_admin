@@ -32,7 +32,9 @@ include('includes/header2.php');
 
                             <button type="submit"  name="sign_in_button" class="btn btn" style="background: #283593; color: white"><b>Sign In</b></button>
 
-
+                            <label
+                                    class="float-end">Don't have an account yet? </label><br>
+                            <a href="sign_up.php" class="btn btn-danger float-end">Sign Up</a>
                         </div>
 
                     </form>

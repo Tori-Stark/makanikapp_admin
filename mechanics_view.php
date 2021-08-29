@@ -1,6 +1,6 @@
 <?php
 include('includes/header.php');
-session_start();
+//session_start();
 include('includes/auth_check.php');
 
 
@@ -55,7 +55,7 @@ include('includes/auth_check.php');
                             <th>Last Name</th>
                             <th>Phone Number</th>
                             <th>Email</th>
-                            <th>Status</th>
+                            <th>Approved</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -78,7 +78,7 @@ include('includes/auth_check.php');
                                     <td><?=$row['lname'];?></td>
                                     <td><?=$row['email'];?></td>
                                     <td><?=$row['phoneno'];?></td>
-                                    <td><?=$row['status'];?></td>
+                                    <td><?=$row['approved'];?></td>
                                     <td>
                                         <a href="edit_mechanic.php?id=<?=$key;?>" class="btn btn-primary btn-sm">Edit</a>
 
